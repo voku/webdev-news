@@ -83,6 +83,7 @@ if ($rss) {
     ' . $plaintextLink . '
     ' . $htmlLink . '
     ' . $mediaLink . '
+    ' . $externalLink . '
   </p>
   ';
 
