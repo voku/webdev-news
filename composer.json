@@ -38,7 +38,8 @@
     "voku/anti-xss": "^1.2.14",
     "voku/simple-cache": "^2.0.12",
     "voku/simple-mysqli": "^1.8.27",
-    "voku/paris": "^1.7.4"
+    "voku/paris": "^1.7.4",
+    "voku/kint": "^2.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0"

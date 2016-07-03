@@ -102,7 +102,18 @@ class Rss extends Model
     if ($pub_date instanceof \DateTime) {
       $this->pub_date = $pub_date->format('Y-m-d H:i:s');
     } else {
-      $this->pub_date = date("Y-m-d H:i:s", strtotime(trim(str_replace('0000', '', $pub_date))));
+      $this->pub_date = date(
+          'Y-m-d H:i:s',
+          strtotime(
+              trim(
+                  preg_replace(
+                      "/(.*)( \+?-?[\d]{4}| \+?-?[\d]{2}:[\d]{2})$/",
+                      '$1',
+                      (string)$pub_date
+                  )
+              )
+          )
+      );
     }
   }
 

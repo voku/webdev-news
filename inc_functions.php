@@ -1,4 +1,5 @@
 <?php
+use kint\Kint;
 use voku\cache\Cache;
 use voku\helper\AntiXSS;
 
@@ -620,4 +621,50 @@ function getUrlsFromString($string)
   }
 
   return $urls;
+}
+
+/**
+ * quick-debug: print the variable $var [exit] [echo || return]
+ *
+ * @param mixed   $var
+ * @param boolean $exit
+ * @param boolean $echo
+ * @param boolean $plaintext
+ * @param boolean $delayedMode
+ *
+ * @return string
+ */
+function dump($var, $exit = true, $echo = true, $plaintext = false, $delayedMode = false)
+{
+  Kint::enabled(true);
+
+  $stash = Kint::settings();
+
+  Kint::$cliDetection = true;
+  Kint::$expandedByDefault = true;
+
+  if ($delayedMode === true) {
+    Kint::$delayedMode = true;
+  }
+
+  if ($plaintext === true) {
+    Kint::enabled(Kint::MODE_WHITESPACE);
+  }
+
+  $output = Kint::dump($var);
+
+  Kint::settings($stash);
+  Kint::enabled(false);
+
+  if ($echo === true) {
+    echo $output;
+  } else {
+    return $output;
+  }
+
+  if ($exit) {
+    exit();
+  } else {
+    return '';
+  }
 }

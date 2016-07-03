@@ -18,7 +18,7 @@ class RssCrawler
   public function get($url)
   {
     $cache = new Cache(null, null, false, true);
-    $cacheKey = 'rss-url||' . $url;
+    $cacheKey = 'rss-url:' . $url;
 
     if ($cache->getCacheIsReady() === true && $cache->existsItem($cacheKey)) {
 

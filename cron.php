@@ -1,6 +1,7 @@
 <?php
 
 ini_set('memory_limit', -1);
+ini_set("mysql.connect_timeout", -1);
 ini_set('max_execution_time', -1);
 
 use paris\orm\Model;
@@ -68,6 +69,10 @@ function saveFeedlyToDb()
           $rssModel->setContentPlaintext((string)$rssItem['content_plaintext']);
           $rssModel->setWebsiteId($websiteModel->getId());
           $rssModel->save();
+
+          // DEBUG
+          dump($rssModel->as_array(), false);
+
         } else {
           continue;
         }

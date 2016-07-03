@@ -47,7 +47,7 @@
             <outline type="rss" text="Netz 10" title="Netz 10" xmlUrl="http://netz10.de/feed/" htmlUrl="http://netz10.de"/>
             <outline type="rss" text="LinuxLounge.net" title="LinuxLounge.net" xmlUrl="http://www.linuxlounge.net/feed/" htmlUrl="https://www.linuxlounge.net"/>
             <outline type="rss" text="Unixoid.de" title="Unixoid.de" xmlUrl="http://unixoid.de/feed/"/>
-            <outline type="rss" text="repats blog" title="repats blog" xmlUrl="http://repat.de/feed/" htmlUrl="http://repat.de"/>
+            <outline type="rss" text="repats blog" title="repats blog" xmlUrl="http://repat.de/feed/atom/" htmlUrl="http://repat.de"/>
             <outline type="rss" text="skweez.net" title="skweez.net" xmlUrl="http://skweez.net/feed/" htmlUrl="http://skweez.net/"/>
             <outline type="rss" text="Web Upd8 - Ubuntu / Linux blog" title="Web Upd8 - Ubuntu / Linux blog" xmlUrl="http://feeds2.feedburner.com/webupd8" htmlUrl="http://www.webupd8.org/"/>
             <outline type="rss" text="Blog-RSS - menadwork :: Multichannel-Markenkommunikation" title="Blog-RSS - menadwork :: Multichannel-Markenkommunikation" xmlUrl="http://www.menadwork.com/tpl_rss.php?pid=68" htmlUrl="http://www.menadwork.com/tpl_rss.php?pid=68"/>
@@ -109,11 +109,11 @@
             <outline type="rss" text="WinFuture News" title="WinFuture News" xmlUrl="http://www.winfuture.de/winfuturenews.xml" htmlUrl="http://winfuture.de/"/>
             <outline type="rss" text="Pro-Linux News" title="Pro-Linux News" xmlUrl="http://www.pro-linux.de/backend/pro-linux.rdf" htmlUrl="http://www.pro-linux.de"/>
             <outline type="rss" text="Linux-Magazin Online News" title="Linux-Magazin Online News" xmlUrl="http://www.linux-magazin.de/rss/feed/news" htmlUrl="http://www.linux-magazin.de/"/>
-            <outline type="rss" text="Golem.de" title="Golem.de" xmlUrl="http://www.golem.de/rss.php?feed=RSS1.0" htmlUrl="http://www.golem.de/"/>
+            <outline type="rss" text="Golem.de" title="Golem.de" xmlUrl="http://www.golem.de/rss.php?feed=RSS2.0" htmlUrl="http://www.golem.de/"/>
             <outline type="rss" text="heise developer neueste Meldungen" title="heise developer neueste Meldungen" xmlUrl="http://www.heise.de/developer/rss/news-atom.xml" htmlUrl="http://www.heise.de/developer/"/>
-            <outline type="rss" text="heise online News" title="heise online News" xmlUrl="http://www.heise.de/newsticker/heise.rdf" htmlUrl="http://www.heise.de/newsticker/"/>
+            <outline type="rss" text="heise online News" title="heise online News" xmlUrl="http://www.heise.de/newsticker/heise-atom.xml" htmlUrl="http://www.heise.de/newsticker/"/>
             <outline type="rss" text="LinuxCommunity RSS-Feed News und Artikel" title="LinuxCommunity RSS-Feed News und Artikel" xmlUrl="http://www.linux-community.de/Ticker/news.rdf" htmlUrl="http://www.linux-community.de/"/>
-            <outline type="rss" text="Slashdot: Linux" title="Slashdot: Linux" xmlUrl="http://rss.slashdot.org/Slashdot/slashdotLinux" htmlUrl="https://linux.slashdot.org/"/>
+            <outline type="rss" text="Slashdot: News" title="Slashdot: Linux" xmlUrl="http://rss.slashdot.org/Slashdot/slashdotMain" htmlUrl="https://slashdot.org/"/>
         </outline>
         <outline text="Hacking" title="Hacking">
             <outline type="rss" text=".The-Wildcat.de" title=".The-Wildcat.de" xmlUrl="http://www.the-wildcat.de/feed/" htmlUrl="http://www.the-wildcat.de"/>
@@ -168,7 +168,7 @@
         <outline text="CSS" title="CSS">
             <outline type="rss" text="maddesigns" title="maddesigns" xmlUrl="http://maddesigns.de/feed" htmlUrl="http://maddesigns.de"/>
             <outline type="rss" text="Lea Verou" title="Lea Verou" xmlUrl="http://leaverou.me/feed/" htmlUrl="http://lea.verou.me"/>
-            <outline type="rss" text="Peter Kröner • Webtechnologie • Weblog" title="Peter Kröner • Webtechnologie • Weblog" xmlUrl="http://www.peterkroener.de/feed/" htmlUrl="http://feeds2.feedburner.com/kroener"/>
+            <outline type="rss" text="Peter Kröner • Webtechnologie • Weblog" title="Peter Kröner • Webtechnologie • Weblog" xmlUrl="http://feeds.feedburner.com/kroener?format=xml" htmlUrl="http://feeds2.feedburner.com/kroener"/>
             <outline type="rss" text="Athabasca Soccer Association" title="Athabasca Soccer Association" xmlUrl="http://dropthebit.com/feed/" htmlUrl="http://athabascasoccer.net"/>
             <outline type="rss" text="Christoph Reinartz" title="Christoph Reinartz" xmlUrl="http://blog.creinartz.de/feed/" htmlUrl="https://blog.creinartz.de"/>
             <outline type="rss" text="Anselm Hannemann" title="Anselm Hannemann" xmlUrl="http://helloanselm.com/atom.xml" htmlUrl="https://helloanselm.com/"/>

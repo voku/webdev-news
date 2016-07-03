@@ -4,7 +4,12 @@ use paris\orm\Model;
 use voku\db\DB;
 use voku\helper\AntiXSS;
 
+// TODO: move html into twig-files
+
 require_once __DIR__ . '/inc_globals.php';
+
+header('X-UA-Compatible: IE=edge,chrome=1');
+header('Content-Type: text/html; charset=utf-8');
 
 // init
 $db = DB::getInstance();
@@ -16,7 +21,7 @@ $text = get('text', FILTER_SANITIZE_NUMBER_INT);
 $html = get('html', FILTER_SANITIZE_NUMBER_INT);
 
 // --------------------------------------
-// RSS
+// RSS-Article
 // --------------------------------------
 
 if ($rss) {
@@ -30,11 +35,6 @@ if ($rss) {
     exit();
   }
 
-  $media = $rssModel->getMedia();
-  if ($media) {
-    $mediaHtml = '<a href="' . $antiXss->xss_clean($media) . '">' . htmlentities($media) . '</a>';
-  }
-
   $plaintextLink = '';
   if ($rssModel->getContentPlaintext()) {
     $plaintextLink = '<a href=index.php?rss=' . (int)$rssModel->getId() . '&text=1>paintext</a>';
@@ -42,19 +42,37 @@ if ($rss) {
 
   $htmlLink = '';
   if ($rssModel->getContentHtml()) {
-    $htmlLink = '<a href=index.php?rss=' . (int)$rssModel->getId() . '&html=1>html</a>';
+    $htmlLink = '| <a href=index.php?rss=' . (int)$rssModel->getId() . '&html=1>html</a>';
   }
 
-  $contentLinkHelper = '';
-  if ($plaintextLink && $htmlLink) {
-    $contentLinkHelper = ' | ';
+  $externalLink = '';
+  if ($rssModel->getLink()) {
+    $externalLink = '| <a target="_blank" href=' . $antiXss->xss_clean($rssModel->getLink()) . '>link</a>';
+  }
+
+  $media = $rssModel->getMedia();
+  $mediaLink = '';
+  $mediaHtml = '';
+  if ($media) {
+    $mediaLink = '| <a target="_blank" href="' . $antiXss->xss_clean($media) . '">media</a>';
+
+    if (
+        strpos($media, '.mp3') !== false
+        ||
+        strpos($media, '.ogg') !== false
+    ) {
+      $mediaHtml = '
+      <audio src="' . $antiXss->xss_clean($media) . '" controls>
+        Your browser does not support the <code>audio</code> element.
+      </audio>
+      <br /><br />
+      ';
+    }
   }
 
   echo '
   <h1>
-    <a href="' . $antiXss->xss_clean($rssModel->getLink()) . '">
-      ' . htmlentities($rssModel->getTitle()) . '
-    </a>
+    <a href="' . $antiXss->xss_clean($rssModel->getLink()) . '">' . htmlentities($rssModel->getTitle()) . '</a>
   </h1>
   <span>
     ' . $mediaHtml . '
@@ -63,8 +81,8 @@ if ($rss) {
   <br /><br />
   <p>
     ' . $plaintextLink . '
-    ' . $contentLinkHelper . '
     ' . $htmlLink . '
+    ' . $mediaLink . '
   </p>
   ';
 
@@ -101,33 +119,28 @@ if ($rss) {
 }
 
 // --------------------------------------
-// OVERVIEW
+// CATEGORY-Overview
 // --------------------------------------
 
-if (!$category) {
-  $sql = "SELECT * FROM webdev_models_website
-    GROUP BY category
-    ORDER BY category
-  ";
-  $result = $db->query($sql);
+$sql = "SELECT * FROM webdev_models_website
+  GROUP BY category
+  ORDER BY category
+";
+$result = $db->query($sql);
 
-  $htmlInner = '';
-  foreach ($result->fetchAllArray() as $row) {
-    $htmlInner .= '
-    <li>
-      <a href=index.php?category=' . urlencode($row['category']) . '>
-        ' . htmlentities($row['category']) . '
-      </a>
-    </li>
-    ';
-  }
-
-  echo '<hr /><nav><ul>' . $htmlInner . '</ul></nav>';
-  exit();
+$htmlInner = '';
+foreach ($result->fetchAllArray() as $row) {
+  $htmlInner .= '
+  <li>
+    <a href=index.php?category=' . urlencode($row['category']) . '>' . htmlentities($row['category']) . '</a>
+  </li>
+  ';
 }
 
+echo '<hr /><nav><ul>' . $htmlInner . '</ul></nav><hr />';
+
 // --------------------------------------
-// CATEGORY
+// CATEGORY-List
 // --------------------------------------
 
 $sql = "SELECT * FROM webdev_models_website as w
@@ -143,14 +156,18 @@ $htmlInner = '';
 foreach ($result->fetchAllArray() as $row) {
   $htmlInner .= '
   <li>
-    <a href=index.php?rss=' . (int)$row['id'] . '>
-      ' . htmlentities($row['title']) . '
-    </a>
-    <span>
-      ' . htmlentities(str_replace(array('http://', 'https://', '//'), '', $row['url'])) . ' | ' . htmlentities($row['pub_date']) . '
-    </span>
-  </li>';
+    <a href=index.php?rss=' . (int)$row['id'] . '>' . htmlentities($row['title']) . '</a>
+    <span>' . htmlentities(
+          str_replace(
+              array(
+                  'http://',
+                  'https://',
+                  '//',
+              ), '', $row['url']
+          )
+      ) . ' | ' . htmlentities($row['pub_date']) . '</span>
+  </li>
+  ';
 }
 
 echo '<nav><ul>' . $htmlInner . '</ul></nav>';
-exit();

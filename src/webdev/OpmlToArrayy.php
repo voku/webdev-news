@@ -23,7 +23,7 @@ class OpmlToArrayy
   private $dom;
 
   /**
-   * @var Arrayy
+   * @var Arrayy[]
    */
   private $rssCategories;
 

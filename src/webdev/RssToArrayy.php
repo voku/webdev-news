@@ -44,6 +44,10 @@ class RssToArrayy
 
       $this->dom = HtmlDomParser::str_get_html($input);
 
+      foreach ($this->dom->find('script, style') as $tag) {
+        $tag->outertext = '';
+      }
+
       $this->parse();
     }
   }
@@ -62,26 +66,30 @@ class RssToArrayy
       $title = (string)$this->parseFindHelper($element, 'title');
       $this->rssArticles[$title] = new Arrayy();
 
+      // init
+      $this->rssArticles[$title]['link'] = new Stringy('');
+      $this->rssArticles[$title]['media'] = new Stringy('');
+      $this->rssArticles[$title]['media'] = new Stringy('');
+      $this->rssArticles[$title]['content_html'] = new Stringy('');
+      $this->rssArticles[$title]['content_plaintext'] = new Stringy('');
+      $this->rssArticles[$title]['pubDate'] = new Stringy('');
+
       // link
       $href = $this->parseFindHelper($element, 'link', 'href');
-      if ((string)$href) {
-        $this->rssArticles[$title]['link'] = $href;
-      } else {
-        $this->rssArticles[$title]['link'] = $this->parseFindHelper($element, 'link');
+      if (!(string)$href) {
+        $href = $this->parseFindHelper($element, 'link');
       }
-      if (!$this->rssArticles[$title]['link']) {
-        $this->rssArticles[$title]['link'] = $this->parseFindHelper($element, 'guid');
+      if (!(string)$href) {
+        $href = $this->parseFindHelper($element, 'guid');
       }
+      $this->rssArticles[$title]['link'] = $href;
 
       // media e.g.: mp3
-      $this->rssArticles[$title]['media'] = new Stringy('');
       $media = $this->parseFindHelper($element, 'enclosure', 'url'); // "<enclosure url=..."
       if (!(string)$media) {
         $media = $this->parseFindHelper($element, 'content', 'url'); // "<media:content url=..."
       }
-      if ((string)$media) {
-        $this->rssArticles[$title]['media'] = $media;
-      }
+      $this->rssArticles[$title]['media'] = $media;
 
       // content
       $content = $this->parseFindHelper($element, 'encoded'); // "<content:encoded>"
@@ -92,22 +100,29 @@ class RssToArrayy
       $this->rssArticles[$title]['content_plaintext'] = $this->htmlToTextHelper($content);
 
       // date
-      $published = $this->parseFindHelper($element, 'published');
-      if ((string)$published) {
-        $this->rssArticles[$title]['pubDate'] = $published;
-      } else {
-        $this->rssArticles[$title]['pubDate'] = $this->parseFindHelper($element, 'pubDate');
+      $date = $this->parseFindHelper($element, 'updated');
+      if (!(string)$date) {
+        $date = $this->parseFindHelper($element, 'published');
       }
+      if (!(string)$date) {
+        $date = $this->parseFindHelper($element, 'pubDate');
+      }
+      if (!(string)$date) {
+        $date = $this->parseFindHelper($element, 'pubdate');
+      }
+      if (!(string)$date) {
+        $date = $this->parseFindHelper($element, 'date'); // <dc:date>
+      }
+      $this->rssArticles[$title]['pubDate'] = $date;
+
 
       // description
       $description = $this->parseFindHelper($element, 'description');
-      if ((string)$description) {
-        $this->rssArticles[$title]['description'] = $description;
-      } else {
-        $this->rssArticles[$title]['description'] = Stringy::create($this->rssArticles[$title]['content_plaintext'])
+      if (!(string)$description) {
+        $description = Stringy::create($this->rssArticles[$title]['content_plaintext'])
                                                            ->shortenAfterWord(100, '...');
       }
-
+      $this->rssArticles[$title]['description'] = $description;
     }
 
     // DEBUG
