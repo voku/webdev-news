@@ -105,7 +105,7 @@ if ($rss) {
       $urlEncode = urlencode($urls[$key]);
       $contentPlaintext = str_replace(
           $urls[$key],
-          '<a href="' . $urlEncode . '">' . $urlEncode . '</a>',
+          '<a target="_blank" href="' . $urlEncode . '">' . $urlEncode . '</a>',
           $contentPlaintext
       );
     }
