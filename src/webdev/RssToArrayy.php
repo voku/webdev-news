@@ -6,7 +6,6 @@ use Arrayy\Arrayy;
 use Stringy\Stringy;
 use voku\helper\HtmlDomParser;
 use voku\helper\SimpleHtmlDom;
-use voku\helper\UTF8;
 use voku\Html2Text\Html2Text;
 
 /**
@@ -69,10 +68,10 @@ class RssToArrayy
       // init
       $this->rssArticles[$title]['link'] = new Stringy('');
       $this->rssArticles[$title]['media'] = new Stringy('');
-      $this->rssArticles[$title]['media'] = new Stringy('');
       $this->rssArticles[$title]['content_html'] = new Stringy('');
       $this->rssArticles[$title]['content_plaintext'] = new Stringy('');
       $this->rssArticles[$title]['pubDate'] = new Stringy('');
+      $this->rssArticles[$title]['description'] = new Stringy('');
 
       // link
       $href = $this->parseFindHelper($element, 'link', 'href');
@@ -115,12 +114,11 @@ class RssToArrayy
       }
       $this->rssArticles[$title]['pubDate'] = $date;
 
-
       // description
       $description = $this->parseFindHelper($element, 'description');
       if (!(string)$description) {
         $description = Stringy::create($this->rssArticles[$title]['content_plaintext'])
-                                                           ->shortenAfterWord(100, '...');
+                              ->shortenAfterWord(100, '...');
       }
       $this->rssArticles[$title]['description'] = $description;
     }
@@ -158,7 +156,7 @@ class RssToArrayy
             '<![CDATA[',
             '&lt;![CDATA[',
             ']]>',
-            ']]&gt;'
+            ']]&gt;',
         ),
         ''
     );

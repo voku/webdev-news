@@ -27,11 +27,15 @@ class RssCrawler
     } else {
 
       // get feed
-      $rss = Request::get($url)
-                    ->expectsHtml()
-                    ->followRedirects(true)
-                    ->send()
-                    ->body;
+      try {
+        $rss = Request::get($url)
+                      ->expectsHtml()
+                      ->followRedirects(true)
+                      ->send()
+            ->body;
+      } catch (\Exception $e) {
+        echo "error: " . $e->getMessage();
+      }
 
       // save feed
       if ($rss) {

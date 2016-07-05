@@ -1,11 +1,11 @@
 <?php
 
-// disable register globals
-/** @noinspection DeprecatedIniOptionsInspection */
 use voku\db\DB;
 use voku\helper\AntiXSS;
-use webdev\ParisWrapper;
+use webdev\utilities\ParisWrapper;
 
+// disable register globals
+/** @noinspection DeprecatedIniOptionsInspection */
 if (isset($_REQUEST) && ini_get("register_globals")) {
   foreach ($_REQUEST as $k => $v) {
     unset($GLOBALS[$k]);

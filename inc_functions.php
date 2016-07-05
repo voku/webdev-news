@@ -67,7 +67,7 @@ function get($key = null, $filter = null, $fillWithEmptyString = false)
     }
 
     if (function_exists('filter_var')) {
-      return $filter ? filter_var($_GET[$key],  $filter) : $_GET[$key];
+      return $filter ? filter_var($_GET[$key], $filter) : $_GET[$key];
     } else {
       return $_GET[$key];
     }
@@ -604,7 +604,7 @@ function getUrlsFromString($string)
   $hits = array();
   $urls = array();
 
-  // regEx for e.g.: https://www.domain.de/foo.php?foobar=1&email=lars%40moelleken.org&guid=test1233312&{{foo}}#bar
+  // regEx for e.g.: [https://www.domain.de/foo.php?foobar=1&email=lars%40moelleken.org&guid=test1233312&{{foo}}#bar]
   $regExUrl = '/(\[?\bhttps?:\/\/[^\s()<>]+(?:\([\w\d]+\)|[^[:punct:]\s]|\/|\}|\]))/i';
 
   if ($string) {

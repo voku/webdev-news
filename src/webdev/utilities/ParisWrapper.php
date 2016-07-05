@@ -1,6 +1,6 @@
 <?php
 
-namespace webdev;
+namespace webdev\utilities;
 
 use idiorm\orm\ORM;
 

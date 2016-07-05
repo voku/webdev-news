@@ -71,7 +71,8 @@ function saveFeedlyToDb()
           $rssModel->save();
 
           // DEBUG
-          dump($rssModel->as_array(), false);
+          $rssDump = $rssModel->as_array();
+          dump($rssDump['link'], false);
 
         } else {
           continue;

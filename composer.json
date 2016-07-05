@@ -33,7 +33,7 @@
     "voku/php-domain-parser": "~5.0.2",
     "voku/Arrayy": "~2.2.0",
     "voku/Stringy": "~2.2.25",
-    "voku/html2text": "~3.2.0",
+    "voku/html2text": "~3.4.0",
     "voku/httpful": "~0.2.25",
     "voku/anti-xss": "^1.2.14",
     "voku/simple-cache": "^2.0.12",
