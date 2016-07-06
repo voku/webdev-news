@@ -37,17 +37,18 @@ if ($rss) {
 
   $plaintextLink = '';
   if ($rssModel->getContentPlaintext()) {
-    $plaintextLink = '<a href=index.php?rss=' . (int)$rssModel->getId() . '&text=1>paintext</a>';
+    $plaintextLink .= '<a href=index.php?rss=' . (int)$rssModel->getId() . '&text=1>paintext</a>';
   }
 
   $htmlLink = '';
   if ($rssModel->getContentHtml()) {
-    $htmlLink = '| <a href=index.php?rss=' . (int)$rssModel->getId() . '&html=1>html</a>';
+    $htmlLink .= '| <a href=index.php?rss=' . (int)$rssModel->getId() . '&html=1>html</a>';
   }
 
   $externalLink = '';
   if ($rssModel->getLink()) {
-    $externalLink = '| <a target="_blank" href=' . $antiXss->xss_clean($rssModel->getLink()) . '>link</a>';
+    $externalLink .= '| <a target="_blank" href=' . $antiXss->xss_clean($rssModel->getLink()) . '>link</a>';
+    $externalLink .= '| <a target="_blank" href=url_to_text.php?url=' . urlencode($antiXss->xss_clean($rssModel->getLink())) . '>link (plaintext)</a>';
   }
 
   $media = $rssModel->getMedia();

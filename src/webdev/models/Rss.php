@@ -9,16 +9,16 @@ use paris\orm\Model;
  * Rss-Feed
  *
  * @property int    $id
- * @property string $created
- * @property string $updated
- * @property string $pub_date
- * @property string $media
- * @property string $link
- * @property string $title
- * @property string $description
- * @property string $content_html
- * $property string $content_plaintext
- * @property int    $website_id
+ * @property-read string $created
+ * @property-read string $updated
+ * @property-read string $pub_date
+ * @property-read string $media
+ * @property-read string $link
+ * @property-read string $title
+ * @property-read string $description
+ * @property-read string $content_html
+ * $property-read string $content_plaintext
+ * @property-read int    $website_id
  */
 class Rss extends Model
 {

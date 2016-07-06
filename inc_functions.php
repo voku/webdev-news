@@ -668,3 +668,34 @@ function dump($var, $exit = true, $echo = true, $plaintext = false, $delayedMode
     return '';
   }
 }
+
+/**
+ * check if this is a "url"
+ *
+ * @param string $url
+ *
+ * @return bool
+ */
+function is_url($url)
+{
+  if (!$url) {
+    return false;
+  }
+
+  // INFO: this is needed for e.g. "http://localhost/"
+  $regex = "/^" .
+           "(?:http:\\/\\/)" .  // look for http://
+           "(?:[A-Z0-9][A-Z0-9_-]*(?:\\.[A-Z0-9][A-Z0-9_-]*))" . // Server name
+           "(?:\\d+)?" .         // optional port number
+           "(?:\\/\\.*)?/i";     // optional training forward slash and page info
+
+  if (preg_match($regex, $url)) {
+    return true;
+  }
+
+  if (!filter_var($url, FILTER_VALIDATE_URL, array('flags' => FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED)) === false) {
+    return true;
+  } else {
+    return false;
+  }
+}

@@ -8,11 +8,11 @@ use paris\orm\Model;
 /**
  * Website: with rss-feeds
  *
- * @property int    $id
- * @property string $url
- * @property string $rss_url
- * @property string $category
- * @property int    $enabled
+ * @property-read int    $id
+ * @property-read string $url
+ * @property-read string $rss_url
+ * @property-read string $category
+ * @property-read int    $enabled
  */
 class Website extends Model
 {
